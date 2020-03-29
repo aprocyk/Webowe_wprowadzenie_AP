@@ -37,9 +37,10 @@ var Board = /** @class */ (function () {
                         console.log("X");
                         b.playerActive = 2;
                         d === null || d === void 0 ? void 0 : d.removeEventListener('click', f);
-                        // let pos = cell.id.toString();
-                        // let posy = parseFloat(pos.charAt(0));
-                        // let posx = parseFloat(pos.charAt(1));
+                        var pos = cell.id.toString();
+                        var posy = parseFloat(pos.charAt(0));
+                        var posx = parseFloat(pos.charAt(1));
+                        b.cellArray[posy - 1][posx - 1].state = States.X;
                         // b.cellArray[posy - 1].splice(posx - 1, 1);
                     }
                     else if (b.playerActive === 2) {
@@ -48,9 +49,10 @@ var Board = /** @class */ (function () {
                         console.log("O");
                         b.playerActive = 1;
                         d === null || d === void 0 ? void 0 : d.removeEventListener('click', f);
-                        // let pos = cell.id.toString();
-                        // let posy = parseFloat(pos.charAt(0));
-                        // let posx = parseFloat(pos.charAt(1));
+                        var pos = cell.id.toString();
+                        var posy = parseFloat(pos.charAt(0));
+                        var posx = parseFloat(pos.charAt(1));
+                        b.cellArray[posy - 1][posx - 1].state = States.O;
                         // b.cellArray[posy - 1].splice(posx - 1, 1);
                     }
                 };

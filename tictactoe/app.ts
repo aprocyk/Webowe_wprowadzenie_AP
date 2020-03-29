@@ -44,19 +44,21 @@ class Board {
                         b.playerActive = 2;
                         d?.removeEventListener('click', f);
 
-                        // let pos = cell.id.toString();
-                        // let posy = parseFloat(pos.charAt(0));
-                        // let posx = parseFloat(pos.charAt(1));
+                        let pos = cell.id.toString();
+                        let posy = parseFloat(pos.charAt(0));
+                        let posx = parseFloat(pos.charAt(1));
+                        b.cellArray[posy-1][posx-1].state = States.X;
                         // b.cellArray[posy - 1].splice(posx - 1, 1);
-
+                        
                     } else if (b.playerActive === 2) {
                         if (d) d.innerText = "O";
                         console.log("O");
                         b.playerActive = 1;
                         d?.removeEventListener('click', f);
-                        // let pos = cell.id.toString();
-                        // let posy = parseFloat(pos.charAt(0));
-                        // let posx = parseFloat(pos.charAt(1));
+                        let pos = cell.id.toString();
+                        let posy = parseFloat(pos.charAt(0));
+                        let posx = parseFloat(pos.charAt(1));
+                        b.cellArray[posy-1][posx-1].state = States.O;
                         // b.cellArray[posy - 1].splice(posx - 1, 1);
 
                     }
