@@ -5,18 +5,62 @@
 }
 table{
     position: absolute;
-    width: 500px;
-    height: 500px;
+    
     left: 35%;
     top: 25%;
+    pointer-events: all;
+    border-spacing: 0;
+    border-collapse: collapse;
 }
 td{
-    border: 1px solid black;
-    padding: 50px;
+    
+    width: 100px;
     
 }
 tr{
-    border: 1px solid black;
-    padding: 50px;
     
+    height: 100px;
+    text-align: center;
+    font-size: 70px;
+    
+}
+#moves{
+    position: absolute;
+    left: 42%;
+    top: 10%;
+    font-size: 30px;
+
+}
+#counter{
+    position: absolute;
+    left: 52%;
+    top: 10%;
+    font-size: 30px;
+}
+#winner{
+    position: absolute;
+    left: 44%;
+    top: 15%;
+    font-size: 30px;
+    color: red;
+}
+.ul{
+    border-bottom: 2px solid black;
+    border-right:  2px solid black;   
+}
+
+.ur{
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+}
+.mm{
+    border: 2px solid black;
+}
+.br{
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+}
+.bl{
+    border-top: 2px solid black;
+    border-right: 2px solid black;
 }
