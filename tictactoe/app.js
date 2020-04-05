@@ -13,20 +13,40 @@ var Board = /** @class */ (function () {
         this.playerActive = 1;
         this.cellArray = [];
         this.turn = 0;
+        this.size = 5;
     }
-    Board.prototype.initializeCells = function () {
+    Board.prototype.generateBoard = function (size) {
         var array = [];
-        for (var i = 1; i <= 3; i++) {
-            var row = [];
-            for (var j = 1; j <= 3; j++) {
-                var C = new Cell();
-                C.id = i * 10 + j;
-                row.push(C);
+        var table = document.querySelector('table');
+        for (var i = 1; i <= size; i++) {
+            var row = document.createElement('tr');
+            var rowArray = [];
+            for (var j = 1; j <= size; j++) {
+                var cell = document.createElement('td');
+                cell.id = "" + i + j;
+                row.appendChild(cell);
+                var cellObject = new Cell();
+                cellObject.id = i * 10 + j;
+                rowArray.push(cellObject);
             }
-            array.push(row);
+            array.push(rowArray);
+            table === null || table === void 0 ? void 0 : table.appendChild(row);
         }
         this.cellArray = array;
     };
+    // initializeCells() {
+    //     let array = [];
+    //     for (let i = 1; i <= 3; i++) {
+    //         let row = [];
+    //         for (let j = 1; j <= 3; j++) {
+    //             let C = new Cell();
+    //             C.id = i * 10 + j;
+    //             row.push(C);
+    //         }
+    //         array.push(row);
+    //     }
+    //     this.cellArray = array;
+    // }
     Board.prototype.assignCells = function () {
         this.cellArray.forEach(function (element) {
             element.forEach(function (cell) {
@@ -91,7 +111,7 @@ var Board = /** @class */ (function () {
     };
     Board.prototype.checkTie = function () {
         this.turnCounter();
-        if (this.turn === 9 &&
+        if (this.turn === this.size * this.size &&
             this.isP1Winner === false &&
             this.isP2Winner === false) {
             this.isTie = true;
@@ -99,6 +119,7 @@ var Board = /** @class */ (function () {
             this.gameFinished();
         }
     };
+    // Nie sprawdza dynamicznie
     Board.prototype.checkWinDiagonally = function () {
         if (this.cellArray[0][0].state === States.X &&
             this.cellArray[1][1].state === States.X &&
@@ -183,5 +204,5 @@ var Cell = /** @class */ (function () {
     return Cell;
 }());
 var b = new Board();
-b.initializeCells();
+b.generateBoard(b.size);
 b.assignCells();

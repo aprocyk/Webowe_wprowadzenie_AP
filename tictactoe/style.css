@@ -15,6 +15,7 @@ table{
 td{
     
     width: 100px;
+    border: 1px black solid;
     
 }
 tr{
@@ -22,6 +23,7 @@ tr{
     height: 100px;
     text-align: center;
     font-size: 70px;
+    border: 1px black solid;
     
 }
 #moves{
@@ -43,24 +45,4 @@ tr{
     top: 15%;
     font-size: 30px;
     color: red;
-}
-.ul{
-    border-bottom: 2px solid black;
-    border-right:  2px solid black;   
-}
-
-.ur{
-    border-bottom: 2px solid black;
-    border-left: 2px solid black;
-}
-.mm{
-    border: 2px solid black;
-}
-.br{
-    border-top: 2px solid black;
-    border-left: 2px solid black;
-}
-.bl{
-    border-top: 2px solid black;
-    border-right: 2px solid black;
 }

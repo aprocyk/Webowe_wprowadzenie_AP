@@ -11,6 +11,7 @@ class Board {
     playerActive: number;
     cellArray: Cell[][];
     turn: number;
+    size: number;
 
     constructor() {
         this.isP1Winner = false;
@@ -19,26 +20,45 @@ class Board {
         this.playerActive = 1;
         this.cellArray = [];
         this.turn = 0;
+        this.size = 5;
     }
-
-    initializeCells() {
+    generateBoard(size:number) {
         let array = [];
-        for (let i = 1; i <= 3; i++) {
-
-            let row = [];
-
-            for (let j = 1; j <= 3; j++) {
-
-                let C = new Cell();
-                C.id = i * 10 + j;
-                row.push(C);
-
+        let table = document.querySelector('table');
+        for (let i = 1; i <= size; i++) {
+            let row = document.createElement('tr');
+            let rowArray = [];
+            for (let j = 1; j <= size; j++) {
+                let cell = document.createElement('td');
+                cell.id = "" + i + j;
+                row.appendChild(cell);
+                let cellObject = new Cell();
+                cellObject.id = i * 10 + j;
+                rowArray.push(cellObject);
             }
-
-            array.push(row);
+            array.push(rowArray);
+            table?.appendChild(row);
         }
         this.cellArray = array;
     }
+    // initializeCells() {
+    //     let array = [];
+    //     for (let i = 1; i <= 3; i++) {
+
+    //         let row = [];
+
+    //         for (let j = 1; j <= 3; j++) {
+
+    //             let C = new Cell();
+    //             C.id = i * 10 + j;
+    //             row.push(C);
+
+    //         }
+
+    //         array.push(row);
+    //     }
+    //     this.cellArray = array;
+    // }
 
     assignCells() {
 
@@ -89,13 +109,13 @@ class Board {
     gameFinished() {
         let d = document.querySelector("#winner");
         let t = document.querySelector("table");
-        if(t) t.style.pointerEvents = "none";
+        if (t) t.style.pointerEvents = "none";
         if (this.isP1Winner === true) {
-            if(d) d.innerHTML = "P1 WINS";
+            if (d) d.innerHTML = "P1 WINS";
         } else if (this.isP2Winner === true) {
-            if(d) d.innerHTML = "P2 WINS";
-        }else if(this.isTie === true){
-            if(d) d.innerHTML = "TIE";
+            if (d) d.innerHTML = "P2 WINS";
+        } else if (this.isTie === true) {
+            if (d) d.innerHTML = "TIE";
         }
     }
 
@@ -106,7 +126,7 @@ class Board {
     }
     checkTie() {
         this.turnCounter();
-        if (this.turn === 9 &&
+        if (this.turn === this.size*this.size &&
             this.isP1Winner === false &&
             this.isP2Winner === false) {
             this.isTie = true;
@@ -114,7 +134,7 @@ class Board {
             this.gameFinished();
         }
     }
-
+    // Nie sprawdza dynamicznie
     checkWinDiagonally() {
         if (this.cellArray[0][0].state === States.X &&
             this.cellArray[1][1].state === States.X &&
@@ -203,5 +223,5 @@ class Cell {
 
 }
 let b = new Board();
-b.initializeCells();
+b.generateBoard(b.size);
 b.assignCells();
