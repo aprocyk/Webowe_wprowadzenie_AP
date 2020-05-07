@@ -13,14 +13,14 @@ var App = /** @class */ (function () {
         this.form = new Form('formtest');
     }
     App.prototype.createPresetForm = function () {
-        var texto = new InputField('textfield', 'babol');
-        var radio = new RadioField('radiofield', 'doot');
-        var checkbox = new CheckboxField('checboxfield', 'oof');
-        var date = new DateField('datefield', 'bop');
-        var textfiedlo = new TextAreaField('textareafield', 'pisz');
-        var mail = new EmailField('mailo', 'starto');
-        this.form.fields.push(texto);
-        this.form.fields.push(radio);
+        var name = new InputField('textfieldname', 'Imię');
+        var surname = new InputField('textfieldsurname', 'Nazwisko');
+        var checkbox = new CheckboxField('checboxfield', 'Czy lubisz masło?');
+        var date = new DateField('datefield', 'Data urodzenia');
+        var textfiedlo = new TextAreaField('textareafield', 'Napisz coś o sobie');
+        var mail = new EmailField('mailo', 'Email');
+        this.form.fields.push(name);
+        this.form.fields.push(surname);
         this.form.fields.push(checkbox);
         this.form.fields.push(date);
         this.form.fields.push(textfiedlo);
@@ -29,12 +29,14 @@ var App = /** @class */ (function () {
     };
     App.prototype.createSubmiter = function () {
         var _this = this;
+        var _a;
         var button = document.createElement('button');
         button.addEventListener('click', function (e) {
             _this.form.getValue();
         });
-        button.innerText = "OOOO";
-        document.body.appendChild(button);
+        button.innerText = "Zatwierdź";
+        //document.body.appendChild(button);
+        (_a = document.querySelector('#formContainer')) === null || _a === void 0 ? void 0 : _a.appendChild(button);
     };
     return App;
 }());
@@ -44,16 +46,36 @@ var Form = /** @class */ (function () {
         this.formElement = document.getElementById(id);
     }
     Form.prototype.render = function () {
+        var formContainer = document.createElement('div');
         var forma = document.createElement('form');
         this.fields.forEach(function (field) {
             forma.appendChild(field.render());
         });
-        document.body.appendChild(forma);
+        formContainer.id = 'formContainer';
+        formContainer.appendChild(forma);
+        document.body.appendChild(formContainer);
     };
     Form.prototype.getValue = function () {
-        this.fields.forEach(function (field) {
-            console.log(field.getValue());
+        var _this = this;
+        var valueContainer = document.createElement('div');
+        valueContainer.id = "valueContainer";
+        this.fields.forEach(function (field, index) {
+            var d = document.createElement('div');
+            var a = document.createElement('a');
+            var b = document.createElement('button');
+            b.addEventListener('click', function (e) {
+                _this.fields.splice(index, 1);
+                valueContainer.removeChild(d);
+            });
+            b.className = "deleteValue";
+            d.className = 'formObject';
+            a.innerText = field.getValue();
+            a.contentEditable = 'true';
+            d.appendChild(a);
+            d.appendChild(b);
+            valueContainer.appendChild(d);
         });
+        document.body.appendChild(valueContainer);
     };
     return Form;
 }());
@@ -72,8 +94,9 @@ var InputField = /** @class */ (function () {
         this.element.id = this.name;
         this.element.type = this.type;
         this.labelelement.htmlFor = this.name;
-        this.labelelement.innerText = this.label;
+        this.labelelement.innerText = this.label + ': ';
         this.container.id = this.name + 'container';
+        this.container.className = 'formInput';
         this.container.appendChild(this.labelelement);
         this.container.appendChild(this.element);
     }
@@ -99,8 +122,9 @@ var TextAreaField = /** @class */ (function () {
         this.element.name = this.name;
         this.element.id = this.name;
         this.labelelement.htmlFor = this.name;
-        this.labelelement.innerText = this.label;
+        this.labelelement.innerText = this.label + ': ';
         this.container.id = this.name + 'container';
+        this.container.className = 'formInput';
         this.container.appendChild(this.labelelement);
         this.container.appendChild(this.element);
     }
@@ -127,8 +151,9 @@ var DateField = /** @class */ (function () {
         this.element.id = this.name;
         this.element.type = this.type;
         this.labelelement.htmlFor = this.name;
-        this.labelelement.innerText = this.label;
+        this.labelelement.innerText = this.label + ': ';
         this.container.id = this.name + 'container';
+        this.container.className = 'formInput';
         this.container.appendChild(this.labelelement);
         this.container.appendChild(this.element);
     }
@@ -155,8 +180,9 @@ var EmailField = /** @class */ (function () {
         this.element.id = this.name;
         this.element.type = this.type;
         this.labelelement.htmlFor = this.name;
-        this.labelelement.innerText = this.label;
+        this.labelelement.innerText = this.label + ': ';
         this.container.id = this.name + 'container';
+        this.container.className = 'formInput';
         this.container.appendChild(this.labelelement);
         this.container.appendChild(this.element);
     }
@@ -183,8 +209,9 @@ var RadioField = /** @class */ (function () {
         this.element.id = this.name;
         this.element.type = this.type;
         this.labelelement.htmlFor = this.name;
-        this.labelelement.innerText = this.label;
+        this.labelelement.innerText = this.label + ': ';
         this.container.id = this.name + 'container';
+        this.container.className = 'formInput';
         this.container.appendChild(this.labelelement);
         this.container.appendChild(this.element);
     }
@@ -211,8 +238,9 @@ var CheckboxField = /** @class */ (function () {
         this.element.id = this.name;
         this.element.type = this.type;
         this.labelelement.htmlFor = this.name;
-        this.labelelement.innerText = this.label;
+        this.labelelement.innerText = this.label + ': ';
         this.container.id = this.name + 'container';
+        this.container.className = 'formInput';
         this.container.appendChild(this.labelelement);
         this.container.appendChild(this.element);
     }
@@ -227,6 +255,3 @@ var CheckboxField = /** @class */ (function () {
 var app = new App();
 app.createPresetForm();
 app.createSubmiter();
-// let ufd = new InputField('kupa', 'dupa');
-// let body = document.body;
-// body.appendChild(ufd.render());

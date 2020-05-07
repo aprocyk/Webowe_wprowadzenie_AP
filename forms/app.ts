@@ -21,15 +21,15 @@ class App{
     }
 
     createPresetForm(): void{
-        let texto = new InputField('textfield','babol');
-        let radio = new RadioField('radiofield','doot');
-        let checkbox = new CheckboxField('checboxfield','oof');
-        let date = new DateField('datefield','bop');
-        let textfiedlo = new TextAreaField('textareafield','pisz');
-        let mail = new EmailField('mailo','starto');
+        let name = new InputField('textfieldname','Imię');
+        let surname = new InputField('textfieldsurname','Nazwisko');
+        let checkbox = new CheckboxField('checboxfield','Czy lubisz masło?');
+        let date = new DateField('datefield','Data urodzenia');
+        let textfiedlo = new TextAreaField('textareafield','Napisz coś o sobie');
+        let mail = new EmailField('mailo','Email');
 
-        this.form.fields.push(texto);
-        this.form.fields.push(radio);
+        this.form.fields.push(name);
+        this.form.fields.push(surname);
         this.form.fields.push(checkbox);
         this.form.fields.push(date);
         this.form.fields.push(textfiedlo);
@@ -44,8 +44,11 @@ class App{
         button.addEventListener('click',(e) =>{
             this.form.getValue();
         });
-        button.innerText = "OOOO";
-        document.body.appendChild(button);
+        button.innerText = "Zatwierdź";
+        //document.body.appendChild(button);
+        document.querySelector('#formContainer')?.appendChild(button);
+
+        
         
         
     }
@@ -62,16 +65,39 @@ class Form{
     }
 
     render(): void{
+        let formContainer = document.createElement('div');
         let forma = document.createElement('form');
         this.fields.forEach(field => {
+            
             forma.appendChild(field.render());
         });
-        document.body.appendChild(forma);
+        formContainer.id = 'formContainer';
+        formContainer.appendChild(forma);
+        document.body.appendChild(formContainer);
     }
     getValue(): void{
-        this.fields.forEach(field => {
-            console.log(field.getValue());
+        let valueContainer = document.createElement('div');
+        valueContainer.id = "valueContainer";
+        this.fields.forEach((field,index) => {
+            let d = document.createElement('div');
+            let a = document.createElement('a');
+            let b = document.createElement('button');
+            b.addEventListener('click',(e)=>{
+                this.fields.splice(index,1);
+                valueContainer.removeChild(d);
+            });
+            
+            b.className = "deleteValue";
+            d.className = 'formObject';
+            a.innerText = field.getValue();
+            a.contentEditable = 'true';
+            d.appendChild(a);
+            d.appendChild(b);
+            
+            valueContainer.appendChild(d);
+
         });
+        document.body.appendChild(valueContainer);
     }
 }
 
@@ -97,8 +123,9 @@ class InputField implements Field {
         this.element.id = this.name;
         this.element.type = this.type;
         this.labelelement.htmlFor = this.name;
-        this.labelelement.innerText = this.label;
+        this.labelelement.innerText = this.label+': ';
         this.container.id = this.name + 'container';
+        this.container.className = 'formInput';
         this.container.appendChild(this.labelelement);
         this.container.appendChild(this.element);
         
@@ -132,8 +159,9 @@ class TextAreaField implements Field {
         this.element.name = this.name;
         this.element.id = this.name;
         this.labelelement.htmlFor = this.name;
-        this.labelelement.innerText = this.label;
+        this.labelelement.innerText = this.label+': ';
         this.container.id = this.name + 'container';
+        this.container.className = 'formInput';
         this.container.appendChild(this.labelelement);
         this.container.appendChild(this.element);
     }
@@ -165,8 +193,9 @@ class DateField implements Field {
         this.element.id = this.name;
         this.element.type = this.type;
         this.labelelement.htmlFor = this.name;
-        this.labelelement.innerText = this.label;
+        this.labelelement.innerText = this.label+': ';
         this.container.id = this.name + 'container';
+        this.container.className = 'formInput';
         this.container.appendChild(this.labelelement);
         this.container.appendChild(this.element);
         
@@ -201,8 +230,9 @@ class EmailField implements Field {
         this.element.id = this.name;
         this.element.type = this.type;
         this.labelelement.htmlFor = this.name;
-        this.labelelement.innerText = this.label;
+        this.labelelement.innerText = this.label+': ';
         this.container.id = this.name + 'container';
+        this.container.className = 'formInput';
         this.container.appendChild(this.labelelement);
         this.container.appendChild(this.element);
         
@@ -237,8 +267,9 @@ class RadioField implements Field {
         this.element.id = this.name;
         this.element.type = this.type;
         this.labelelement.htmlFor = this.name;
-        this.labelelement.innerText = this.label;
+        this.labelelement.innerText = this.label+': ';
         this.container.id = this.name + 'container';
+        this.container.className = 'formInput';
         this.container.appendChild(this.labelelement);
         this.container.appendChild(this.element);
         
@@ -273,8 +304,9 @@ class CheckboxField implements Field {
         this.element.id = this.name;
         this.element.type = this.type;
         this.labelelement.htmlFor = this.name;
-        this.labelelement.innerText = this.label;
+        this.labelelement.innerText = this.label+': ';
         this.container.id = this.name + 'container';
+        this.container.className = 'formInput';
         this.container.appendChild(this.labelelement);
         this.container.appendChild(this.element);
         
@@ -291,6 +323,4 @@ class CheckboxField implements Field {
 let app = new App();
 app.createPresetForm();
 app.createSubmiter();
-// let ufd = new InputField('kupa', 'dupa');
-// let body = document.body;
-// body.appendChild(ufd.render());
+
