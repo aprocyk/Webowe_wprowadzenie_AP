@@ -1,0 +1,31 @@
+#formContainer{
+    width: 25%;
+    /* float: left;
+    position: relative;
+     */
+}
+#valueContainer{
+    width: 40%;
+    /* float: left;
+    position: relative; */
+    border-bottom: 1px solid gray;
+}
+.formObject{
+    margin-bottom: 5px;
+    /* background-color: lightgray; */
+    width: 25%;
+}
+.deleteValue{
+    position: absolute;
+    border: none;
+    background-image: url(xbut.png);
+    
+    margin: 3px;
+    left: 25%;
+    width: 15px;
+    height: 15px;
+    outline:none;
+}
+.formInput{
+    margin-bottom: 15px;
+}
