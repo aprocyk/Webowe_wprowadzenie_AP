@@ -1,0 +1,31 @@
+
+@use 'posRelLeft.scss' as posLeft;
+@use 'skins.scss' as skin;
+
+#formContainer{
+  width: 25%;
+   @include posLeft.leftRelative;
+}
+#valueContainer{
+  width: 40%;
+  @include posLeft.leftRelative;
+  border-bottom: skin.$borderGray;
+}
+.formObject{
+  margin-bottom: 5px;
+  background-color: skin.$formBackground;
+  width: 25%;
+}
+.deleteValue{
+  position: absolute;
+  border: none;
+  outline:none;
+  background-image: url('/forms/dist/xbut.png');
+  margin: 3px;
+  left: 25%;
+  @include skin.buttonSize;
+  
+}
+.formInput{
+  margin-bottom: 15px;
+}

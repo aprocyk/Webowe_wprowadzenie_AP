@@ -4,7 +4,8 @@ enum FieldType {
     emailInput = 'email',
     radioInput = 'radio',
     checkboxInput = 'checkbox',
-    textAreaInput = 'textarea'
+    textAreaInput = 'textarea',
+    selectInput = 'select'
 }
 interface Field {
     name: string;
