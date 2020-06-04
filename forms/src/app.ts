@@ -37,6 +37,7 @@ class App{
         button.addEventListener('click',(e) =>{
             this.form.getValue();
             this.form.renderValue();
+            button.disabled = true;
             this.form.values.forEach((element: string) => {
                 socket.send(element);
             });

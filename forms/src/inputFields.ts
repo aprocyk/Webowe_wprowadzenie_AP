@@ -231,11 +231,15 @@ class SelectField implements Field {
         this.container =
             <HTMLElement>document.createElement('div');
         this.element =
-            <HTMLSelectElement>document.createElement(this.type);
+            <HTMLSelectElement>document.createElement(this.type);    
         this.labelelement =
             <HTMLLabelElement>document.createElement('label');
         this.name = name;
         this.label = label;
+
+        let regSelect =  <HTMLSelectElement>document.createElement(this.type);
+        regSelect.name = 'regions';
+        regSelect.id = 'regions';
 
         this.element.name = this.name;
         this.element.id = this.name;
@@ -245,11 +249,23 @@ class SelectField implements Field {
         this.container.id = this.name + 'container';
         this.container.className = 'formInput';
         this.container.appendChild(this.labelelement);
+        this.container.appendChild(regSelect);
         this.container.appendChild(this.element);
+        
+        
+        let regions: string[] = ['Asia', 'Europe', 'Africa', 'Oceania', 'Americas', 'Polar'];
+
+        for(let region of regions){
+            let regOption = <HTMLOptionElement>document.createElement("option");
+            regOption.text = region;
+            regOption.value = region;
+            regSelect.options.add(regOption);
+        }
 
         this.fetchOptions<{ name: string, region: string }>("https://restcountries.eu/rest/v2/all").then((data) => {
             data.filter(x => x.region === 'Europe').map(x => x.name).forEach(e => {
                 let option = <HTMLOptionElement>document.createElement("option");
+                option.id = 'countries';
                 option.text = e;
                 option.value = e;
                 this.element.options.add(option);

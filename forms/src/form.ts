@@ -14,11 +14,15 @@ class Form {
     render(): void {
         let formContainer = document.createElement('div');
         let forma = document.createElement('form');
+        
         this.fields.forEach(field => {
 
             forma.appendChild(field.render());
         });
+        
         formContainer.id = 'formContainer';
+        
+        
         formContainer.appendChild(forma);
         document.body.appendChild(formContainer);
     }
@@ -32,7 +36,12 @@ class Form {
     renderValue(): void {
         let valuesDS = new Array();
         valuesDS = JSON.parse(localStorage.getItem('form')!);
-
+        let deleteStorage = document.createElement('button');
+        deleteStorage.addEventListener('click', (e) => {
+            localStorage.clear();
+            location.reload()
+        });
+        deleteStorage.innerText="USUŃ";
         let valueContainer = document.createElement('div');
         valueContainer.id = "valueContainer";
 
@@ -58,7 +67,7 @@ class Form {
             d.appendChild(deleteSingleObject);
             valueContainer.appendChild(d);
         });
-
+        valueContainer.appendChild(deleteStorage);
         document.body.appendChild(valueContainer);
     }
 } export { Form };
