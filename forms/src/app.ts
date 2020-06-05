@@ -1,7 +1,15 @@
 
 import {Form} from './form';
-import {CheckboxField, RadioField, EmailField, DateField, TextAreaField, InputField, SelectField} from './inputFields';
+
 import './styles/styles.scss';
+import {InputField} from './inputField';
+import {RadioField} from './radioField';
+import {CheckboxField} from './checkboxField';
+import {EmailField} from './emailField';
+import {DateField} from './dateField';
+import {TextAreaField} from './textAreaField';
+import {SelectCountryField} from './selectCountryField';
+import {SelectField} from './selectField';
 class App{
     form: any;
     
@@ -17,15 +25,17 @@ class App{
         let date = new DateField('datefield','Data urodzenia');
         let textfiedlo = new TextAreaField('textareafield','Napisz coś o sobie');
         let mail = new EmailField('mailo','Email');
-        let select = new SelectField('selecto', 'Kraj pochodzenia');
+        let selectCountry = new SelectCountryField('selectCountry', 'Kraj pochodzenia');
+        let select = new SelectField('select','Kierunek studiów',['Informatyka i ekonometria', 'Zarządzanie', 'Finanse i rachunkowość']);
 
         this.form.fields.push(name);
         this.form.fields.push(surname);
+        this.form.fields.push(select);
         this.form.fields.push(checkbox);
         this.form.fields.push(date);
         this.form.fields.push(textfiedlo);
         this.form.fields.push(mail);
-        this.form.fields.push(select);
+        this.form.fields.push(selectCountry);
         this.form.render();
         
         
